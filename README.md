@@ -8,7 +8,7 @@ It's built on top of the excellent, but appallingly-named [google-diff-match-pat
 - Ace (or [Brace](https://github.com/thlorenz/brace)) Editor 1.1.8 or later (probably works on older versions, but I haven't confirmed)
 
 ## Demos
-Take a look at [demos on Ace-diff page](https://ace-diff.github.io/ace-diff/). The demos illustrate a few different configurations and styles. Hopefully they'll give you a rough sense of what it does and how it works.
+Take a look at [demos on Ace-diff page](https://ace-diffy.github.io/ace-diff/). The demos illustrate a few different configurations and styles. Hopefully they'll give you a rough sense of what it does and how it works.
 
 
 ## Features
@@ -23,29 +23,29 @@ Take a look at [demos on Ace-diff page](https://ace-diff.github.io/ace-diff/). T
 
 ### Use npm
 ```bash
-npm i ace-diff -S
+npm i ace-diffy -S
 ```
 
 ```js
-import AceDiff from 'ace-diff';
+import AceDiffy from 'ace-diffy';
 
 // optionally, include CSS, or use your own
-import 'ace-diff/dist/ace-diff.min.css';
+import 'ace-diffy/dist/ace-diffy.min.css';
 // Or use the dark mode
-import 'ace-diff/dist/ace-diff-dark.min.css';
+import 'ace-diffy/dist/ace-diffy-dark.min.css';
 ```
 
 ### Use CDN
-Grab ace-diff from CDN:
+Grab ace-diffy from CDN:
 
 ```html
-<script src="https://unpkg.com/ace-diff@^2.0.0"></script>
+<script src="https://unpkg.com/ace-diffy@^2.0.0"></script>
 
 <!-- optionally include CSS, or use your own -->
-<link href="https://unpkg.com/ace-diff@^2.0.0/dist/ace-diff.min.css" rel="stylesheet">
+<link href="https://unpkg.com/ace-diffy@^2.0.0/dist/ace-diffy.min.css" rel="stylesheet">
 
 <!-- optionally there is also a dark mode CSS -->
-<link href="https://unpkg.com/ace-diff@^2.0.0/dist/ace-diff-dark.min.css" rel="stylesheet">
+<link href="https://unpkg.com/ace-diffy@^2.0.0/dist/ace-diffy-dark.min.css" rel="stylesheet">
 ```
 
 ### HTML
@@ -55,10 +55,10 @@ Grab ace-diff from CDN:
 ```
 
 ### JavaScript
-Here's an example of how you'd instantiate AceDiff.
+Here's an example of how you'd instantiate AceDiffy.
 
 ```js
-var differ = new AceDiff({
+var differ = new AceDiffy({
   element: '.acediff',
   left: {
     content: 'your first file content here',
@@ -77,7 +77,7 @@ Styling the elements is vitally important: the gutter should retain its width ev
 
 If you want the ace editor's to change height/width based on a user's browser, I find using flexbox the best option - but hell, if you want to use a `<table>`, knock yourself out. :)
 
-Take a look at the [demos](http://ace-diff.github.io/ace-diff/) for some ideas. They all use flexbox for the layouts, but include some different styles and class names just so you can see.
+Take a look at the [demos](http://ace-diffy.github.io/ace-diffy/) for some ideas. They all use flexbox for the layouts, but include some different styles and class names just so you can see.
 
 
 ## Configuration
@@ -127,12 +127,12 @@ Here are all the defaults. I'll explain each one in details below. Note: you onl
 - `element` (string<DOM selector> or element object, required). The element used for Ace-diff
 - `mode` (string, optional). this is the mode for the Ace Editor, e.g. `"ace/mode/javascript"`. Check out the Ace docs for that. This setting will be applied to both editors. I figured 99.999999% of the time you're going to want the same mode for both of them so you can just set it once here. If you're a mad genius and want to have different modes for each side, (a) *whoah man, what's your use-case?*, and (b) you can override this setting in one of the settings below. Read on.
 - `theme` (string, optional). This lets you set the theme for both editors.
-- `diffGranularity` (string, optional, default: `broad`). this has two options (`specific`, and `broad`). Basically this determines how aggressively AceDiff combines diffs to simplify the interface. I found that often it's a judgement call as to whether multiple diffs on one side should be grouped. This setting provides a little control over it.
+- `diffGranularity` (string, optional, default: `broad`). this has two options (`specific`, and `broad`). Basically this determines how aggressively AceDiffy combines diffs to simplify the interface. I found that often it's a judgement call as to whether multiple diffs on one side should be grouped. This setting provides a little control over it.
 - `showDiffs` (boolean, optional, default: `true`). Whether or not the diffs are enabled. This basically turns everything off.
 - `showConnectors` (boolean, optional, default: `true`). Whether or not the gutter in the middle show show connectors visualizing where the left and right changes map to one another.
-- `maxDiffs` (integer, optional, default: `5000`). This was added a safety precaution. For really massive files with vast numbers of diffs, it's possible the Ace instances or AceDiff will become too laggy. This simply disables the diffing altogether once you hit a certain number of diffs.
+- `maxDiffs` (integer, optional, default: `5000`). This was added a safety precaution. For really massive files with vast numbers of diffs, it's possible the Ace instances or AceDiffy will become too laggy. This simply disables the diffing altogether once you hit a certain number of diffs.
 - `left/right`. this object contains settings specific to the leftmost editor.
-- `left.content / right.content` (string, optional, default: `null`). If you like, when you instantiate AceDiff you can include the content that should appear in the leftmost editor via this property.
+- `left.content / right.content` (string, optional, default: `null`). If you like, when you instantiate AceDiffy you can include the content that should appear in the leftmost editor via this property.
 - `left.mode / right.mode` (string, optional, defaults to whatever you entered in `mode`). This lets you override the default Ace Editor mode specified in `mode`.
 - `left.theme / right.theme` (string, optional, defaults to whatever you entered in `theme`). This lets you override the default Ace Editor theme specified in `theme`.
 - `left.editable / right.editable` (boolean, optional, default: `true`). Whether the left editor is editable or not.
@@ -148,13 +148,13 @@ Here are all the defaults. I'll explain each one in details below. Note: you onl
 
 ## API
 
-There are a few API methods available on your AceDiff instance.
+There are a few API methods available on your AceDiffy instance.
 
 - `aceInstance.getEditors()`: this returns an object with left and right properties. Each contains a reference to the Ace editor, in case you need to do anything with them. Ace has a ton of options which I wasn't going to support via the wrapper. This should allow you to do whatever you need
 - `aceInstance.setOptions()`: this lets you set many of the above options on the fly. Note: certain things used during the construction of the editor, like the classes can't be overridden.
 - `aceInstance.getNumDiffs()`: returns the number of diffs currently being displayed.
-- `aceInstance.diff()`: updates the diff. This shouldn't ever be required because AceDiff automatically recognizes the key events like changes to the editor and window resizing. But I've included it because there may always be that fringe case...
-- `aceInstance.destroy()`: destroys the AceDiff instance. Basically this just destroys both editors and cleans out the gutter.
+- `aceInstance.diff()`: updates the diff. This shouldn't ever be required because AceDiffy automatically recognizes the key events like changes to the editor and window resizing. But I've included it because there may always be that fringe case...
+- `aceInstance.destroy()`: destroys the AceDiffy instance. Basically this just destroys both editors and cleans out the gutter.
 
 
 ## Browser Support

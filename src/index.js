@@ -27,7 +27,7 @@ const C = {
 };
 
 // our constructor
-function AceDiff(options) {
+function AceDiffy(options) {
   this.options = merge({
     mode: null,
     theme: null,
@@ -118,8 +118,8 @@ function AceDiff(options) {
 }
 
 // our public API
-AceDiff.prototype = {
-  // allows on-the-fly changes to the AceDiff instance settings
+AceDiffy.prototype = {
+  // allows on-the-fly changes to the AceDiffy instance settings
   setOptions(options) {
     merge(this.options, options);
     _setOptions(this);
@@ -820,4 +820,4 @@ function _setOptions(acediff) {
   acediff.editors.right.ace.setTheme(getTheme(acediff, C.EDITOR_RIGHT));
 }
 
-export default AceDiff;
+export default AceDiffy;

@@ -4,8 +4,8 @@ describe('Basic usage', () => {
       cy.visit('http://localhost:8081/test/fixtures/');
     });
 
-    it('makes `AceDiff` available globally', () => {
-      cy.window().should('have.property', 'AceDiff');
+    it('makes `AceDiffy` available globally', () => {
+      cy.window().should('have.property', 'AceDiffy');
     });
 
     it('shows 2 Ace editors', () => {

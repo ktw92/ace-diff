@@ -1,10 +1,10 @@
 {
-  "name": "ace-diff",
+  "name": "ace-diffy",
   "version": "0.0.0-development",
   "description": "A diff/merging wrapper for Ace Editor built on google-diff-match-patch",
-  "main": "dist/ace-diff.min.js",
+  "main": "dist/ace-diffy.min.js",
   "module": "src/index.js",
-  "unpkg": "dist/ace-diff.min.js",
+  "unpkg": "dist/ace-diffy.min.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch & npm run serve",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ace-diff/ace-diff.git"
+    "url": "https://github.com/svilenkov/ace-diff.git"
   },
   "keywords": [
     "ace",
@@ -31,9 +31,9 @@
   "author": "Ben Keen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ace-diff/ace-diff/issues"
+    "url": "https://github.com/svilenkov/ace-diff/issues"
   },
-  "homepage": "https://ace-diff.github.io/ace-diff/",
+  "homepage": "https://ace-diffy.github.io/ace-diff",
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",

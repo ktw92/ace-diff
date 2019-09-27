@@ -12,7 +12,7 @@ describe('Ace-diff API', () => {
   });
 
   context('setOptions()', () => {
-    it('lets you set the ace-diff options', () => {
+    it('lets you set the ace-diffy options', () => {
       cy.window().then((win) => {
         expect(win.aceDiffer.options.diffGranularity).to.equal('broad');
         win.aceDiffer.setOptions({

@@ -10,14 +10,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // I'd rather have it as a choice whether I want to use that CSS or my own
 module.exports = {
   entry: {
-    'ace-diff': './src/index.js',
-    'ace-diff-light': './src/styles/ace-diff.scss',
-    'ace-diff-dark': './src/styles/ace-diff-dark.scss',
+    'ace-diffy': './src/index.js',
+    'ace-diffy-light': './src/styles/ace-diffy.scss',
+    'ace-diffy-dark': './src/styles/ace-diffy-dark.scss',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].min.js',
-    library: 'AceDiff',
+    library: 'AceDiffy',
     libraryTarget: 'umd',
     libraryExport: 'default',
   },
@@ -65,6 +65,6 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
     new UglifyJsPlugin(),
-    new webpack.BannerPlugin('Ace-diff | github.com/ace-diff/ace-diff'),
+    new webpack.BannerPlugin('Ace-diffy | github.com/svilenkov/ace-diff'),
   ],
 };
