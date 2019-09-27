@@ -107,41 +107,22 @@ function AceDiff(options) {
   };
 
 
-
   // set up the editors
-  this.editors.left.ace.getSession().setMode(getMode(this, C.EDITOR_LEFT));
-  this.editors.right.ace.getSession().setMode(getMode(this, C.EDITOR_RIGHT));
-  this.editors.left.ace.setReadOnly(!this.options.left.editable);
-  this.editors.right.ace.setReadOnly(!this.options.right.editable);
-  this.editors.left.ace.setTheme(getTheme(this, C.EDITOR_LEFT));
-  this.editors.right.ace.setTheme(getTheme(this, C.EDITOR_RIGHT));
+  _setOptions(this);
 
   this.editors.left.ace.setValue(normalizeContent(this.options.left.content), -1);
   this.editors.right.ace.setValue(normalizeContent(this.options.right.content), -1);
 
   // store the visible height of the editors (assumed the same)
   this.editors.editorHeight = getEditorHeight(this);
-
-  // The lineHeight is set to 0 initially and we need to wait for another tick to get it
-  // Thus moving the diff() with it
-  setTimeout(() => {
-    // assumption: both editors have same line heights
-    this.lineHeight = this.editors.left.ace.renderer.lineHeight;
-
-    addEventHandlers(this);
-    createCopyContainers(this);
-    createGutter(this);
-    this.diff();
-  }, 1);
 }
-
 
 // our public API
 AceDiff.prototype = {
-
   // allows on-the-fly changes to the AceDiff instance settings
   setOptions(options) {
     merge(this.options, options);
+    _setOptions(this);
     this.diff();
   },
 
@@ -156,6 +137,20 @@ AceDiff.prototype = {
       right: this.editors.right.ace,
     };
   },
+
+  async create() {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      setTimeout(function() {
+        self.lineHeight = self.editors.left.ace.renderer.lineHeight;
+        addEventHandlers(self);
+        createCopyContainers(self);
+        createGutter(self);
+        self.diff();
+        resolve()
+      } , 1);
+    });
+   },
 
   // our main diffing function. I actually don't think this needs to exposed: it's called automatically,
   // but just to be safe, it's included
@@ -721,7 +716,13 @@ function clearGutter(acediff) {
   // gutter.innerHTML = '';
 
   const gutterEl = document.getElementById(acediff.options.classes.gutterID);
-  gutterEl.removeChild(acediff.gutterSVG);
+
+  if(typeof gutterEl !== 'undefined'
+    && typeof acediff.gutterSVG !== 'undefined'
+    && gutterEl.contains(acediff.gutterSVG)
+   ) {
+    gutterEl.removeChild(acediff.gutterSVG);
+  }
 
   createGutter(acediff);
 }
@@ -808,6 +809,15 @@ function getScrollingInfo(acediff, dir) {
 function getEditorHeight(acediff) {
   // editorHeight: document.getElementById(acediff.options.left.id).clientHeight
   return document.getElementById(acediff.options.left.id).offsetHeight;
+}
+
+function _setOptions(acediff) {
+  acediff.editors.left.ace.getSession().setMode(getMode(acediff, C.EDITOR_LEFT));
+  acediff.editors.right.ace.getSession().setMode(getMode(acediff, C.EDITOR_RIGHT));
+  acediff.editors.left.ace.setReadOnly(!acediff.options.left.editable);
+  acediff.editors.right.ace.setReadOnly(!acediff.options.right.editable);
+  acediff.editors.left.ace.setTheme(getTheme(acediff, C.EDITOR_LEFT));
+  acediff.editors.right.ace.setTheme(getTheme(acediff, C.EDITOR_RIGHT));
 }
 
 export default AceDiff;
