@@ -1,6 +1,6 @@
 {
   "name": "ace-diffy",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "description": "A diff/merging wrapper for Ace Editor built on google-diff-match-patch",
   "main": "dist/ace-diffy.min.js",
   "module": "src/index.js",
