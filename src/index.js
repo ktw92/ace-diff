@@ -1,4 +1,5 @@
-import ace from 'brace'; // eslint-disable-line
+//brace to ace-bilds, your project need ace-builds // origin ->import ace from 'brace'; // eslint-disable-line
+import * as ace from 'ace-builds';
 import merge from 'lodash/merge';
 import debounce from 'lodash/debounce';
 import throttle from 'lodash/throttle';
@@ -9,7 +10,8 @@ import getCurve from './visuals/getCurve';
 import ensureElement from './dom/ensureElement';
 import query from './dom/query';
 
-const requireFunc = (ace.acequire || ace.require);
+//brace to ace-bilds, your project need ace-builds// origin -> const requireFunc = (ace.acequire || ace.require);
+const requireFunc = (ace.require);
 
 const { Range } = requireFunc('ace/range');
 
